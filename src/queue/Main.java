@@ -20,6 +20,7 @@ public class Main {
         int choice = 0;
         boolean isRunning = true;
         
+        try{
         //RUN CODE WHILE ISRUNNIS IS TRUE -> WHEN FALSE IS CASE 6
         while(isRunning == true){
         System.out.println("\nQueue menu");
@@ -67,8 +68,15 @@ public class Main {
             default:
                     System.out.println("not valid choice");
            
-            }
+                }
+        }  
+        }//try finish
+        catch (Exception e){
+            System.out.println("ERROR");
+                 
         }
+        
+        
         
         scanner.close();
     }
