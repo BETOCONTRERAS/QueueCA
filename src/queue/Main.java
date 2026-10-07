@@ -14,7 +14,9 @@ public class Main {
     
     public static void main(String[] args) {
         
+        
         Scanner scanner = new Scanner(System.in);
+        
         
         Queue queue = new Queue(5);
         int choice = 0;
@@ -24,12 +26,14 @@ public class Main {
         //RUN CODE WHILE ISRUNNIS IS TRUE -> WHEN FALSE IS CASE 6
         while(isRunning == true){
         System.out.println("\nQueue menu");
-        System.out.println("1. Enqueue");
-        System.out.println("2. Dequeue");
-        System.out.println("3. Front");
-        System.out.println("4. Rear");
-        System.out.println("5. Display Queue");
-        System.out.println("6. exit");
+        System.out.println("1. Enqueue from Rear");
+        System.out.println("2. Enqueue from Front");
+        System.out.println("3. Dequeue from Rear");
+        System.out.println("4. Dequeue from Front");
+        System.out.println("5. Front");
+        System.out.println("6. Rear");
+        System.out.println("7. Display Queue");
+        System.out.println("8. exit");
         
         System.out.print("\nEnter your choice:");
         choice =scanner.nextInt();
@@ -39,30 +43,38 @@ public class Main {
         
             //enqueue
             case 1: 
-                    queue.enqueue();
+                    queue.enqueueRear();
                 break;
-                
+            
             //dequeue   
-            case 2: 
-                    queue.dequeue();
+           case 2: 
+                    queue.enqueueFront();
+                break;     
+            //dequeue   
+            case 3: 
+                    queue.dequeueRear();
                 break;
+            
+            case 4: 
+                    queue.dequeueFront();
+                break;   
                 
             //display front    
-            case 3: 
+            case 5: 
                     System.out.println(queue.getFront());
                 break;
                 
             //display rear         
-            case 4: 
+            case 6: 
                     System.out.println(queue.getRear());
                 break;
             
             //display
-            case 5: 
+            case 7: 
                     queue.display();
                 break;
-            case 6:
-                    isRunning = false;
+            case 8:
+                   isRunning = false;
                 break;
                 
             default:
