@@ -44,17 +44,17 @@ public class Queue {
     }
     
     //check if array is full, if not value goes to the front and rear increases
-    public void enqueue(){
+    public void enqueueRear(){
         
         if(isFull()){
-            
+            System.out.println("\n QUEUE IS FULL \n");
             return;
         }
         
         Scanner scanner = new Scanner(System.in);
         
         
-        System.out.println("Enter value to queue");
+        System.out.print("Enter value to queue: ");
         int value = scanner.nextInt();
         scanner.nextLine();
 
@@ -70,11 +70,43 @@ public class Queue {
         arr[rear] = value;
         size++;                 //increment count
 
-        System.out.println( "You have enqueued " + value + "to the index " + rear);
+        System.out.println( "You have enqueued " + value + " to the index " + rear);
         
     }
     
-    public void dequeue(){
+     //enqueue from the front
+    public void enqueueFront(){
+        if(isFull()){
+            System.out.println("\n QUEUE IS FULL \n");
+            return;
+        }
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        System.out.print("Enter value to queue: ");
+        int value = scanner.nextInt();
+        scanner.nextLine();
+        
+        /*
+        
+        
+        */
+        if(isEmpty()){
+            front = 0;
+            rear = 0;
+        }
+        else{
+        front = ((front-1)+capacity)%capacity;
+        }
+        arr[front] = value;
+        size++;
+        
+        System.out.println( "You have enqueued " + value + " to the index " + front);
+        System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+    }
+    
+    
+    public void dequeueFront(){
     
         
         
@@ -96,13 +128,52 @@ public class Queue {
         */
         front = (front + 1) % capacity; 
         size--;     //decrease the counter by 1
+        
+        if(isEmpty()){
+            front = 0;
+            rear = -1;
+            //output message with the dequeued value
+            System.out.println("You have dequeued " + deValue);
+            System.out.println("\nQUEUE IS NOW EMPTY\n");
+        }
+        else{
+            System.out.println("You have dequeued " + deValue);
+            System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+        }
+        
 
-        
-        //output message with the dequeued value
-        System.out.println("You have dequeued " + deValue);
-        
-        
+    
     }
+    
+   
+    
+    //dequeue from the rear
+     public void dequeueRear(){
+         if(isEmpty()){ //check if empty
+            System.out.println("\n QUEUE IS EMPTY \n");
+            return;
+        }
+        
+        int deValue = arr[front]; //storing value dequeued
+        
+        rear = ((rear-1)+capacity)%capacity;
+        size--;
+        
+        
+        if(isEmpty()){
+            front = 0;
+            rear = -1;
+            //output message with the dequeued value
+            System.out.println("\nYou have dequeued: " + deValue);
+            System.out.println("\nQUEUE IS NOW EMPTY\n");
+        }
+        else{
+            System.out.println("You have dequeued: " + deValue);
+            System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+        }
+     }
+    
+     
     
     public int getFront(){
     
@@ -149,11 +220,11 @@ public class Queue {
                     */
             
             int index = (front + i)%capacity;
-            System.out.println(arr[index] + " ");
+            System.out.print(arr[index] + " ");
             
         }
         
-        System.out.println("\n QUEUE FINISHED \n");
+        System.out.println("\n\n QUEUE FINISHED \n");
         
     }
     
