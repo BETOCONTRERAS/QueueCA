@@ -18,7 +18,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         
         
-        Queue queue = new Queue(5);
+        Queue queue = new Queue(8);
         int choice = 0;
         boolean isRunning = true;
         
@@ -35,10 +35,10 @@ public class Main {
         System.out.println("7. Display Queue");
         System.out.println("8. exit");
         
-        System.out.print("\nEnter your choice:");
-        choice =scanner.nextInt();
+        System.out.print("\nEnter your choice: ");
+        choice =scanner.nextInt(); //HOW TO SOLVE WRONG INPUT -> LETTERS??!!
         scanner.nextLine();
-        
+
         switch(choice){
         
             //enqueue
@@ -61,12 +61,12 @@ public class Main {
                 
             //display front    
             case 5: 
-                    System.out.println(queue.getFront());
+                    System.out.println("Front value: " + queue.getFront());
                 break;
                 
             //display rear         
             case 6: 
-                    System.out.println(queue.getRear());
+                    System.out.println("Rear value: " + queue.getRear());
                 break;
             
             //display
