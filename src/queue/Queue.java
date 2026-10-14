@@ -5,8 +5,9 @@
 package queue;
 
 import food.Burger;
-import food.Food;
+import food.*;
 import inpututils.InputUtils;
+import java.time.DateTimeException;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -57,39 +58,13 @@ public class Queue {
             return;
         }
         
-        Scanner scanner = new Scanner(System.in);
-        
-        String type;
-        int weight;
-        String bbd;
-        boolean isValid =false;
-        
-        do{
-        type = in.askUserForText("Please enter the food you want (5 options only ): Burger, Pizza, Fries, Sandwich, Hotdog");
-        type.trim();
-         switch(type.toLowerCase()){
-                        case "burger":
-                 
-         
-         
-         }
-        
-        
-        } while (!isValid);
+        Food food = askForFood(); // creates one Food object
+        rear = (rear + 1) % arr.length;
+        arr[rear] = food;
+        size++;
 
-//assign to rear the result of rear+1 modulus capacity, and then assign the value given to 
-        /*
-        ***EXAMPLE***
-        rear = 2
-        new rear = (2+1)% capacity-> 5 = 3
-        new rear = 3    
-        */
-        //the index to the index value of rear
-        rear = (rear + 1) % capacity;
-        arr[rear] = value;
-        size++;                 //increment count
-
-        System.out.println( "You have enqueued " + value + " to the index " + rear);
+        System.out.println("Added " + food.getType() + " to the queue.");
+        
         
     }
     
@@ -99,17 +74,9 @@ public class Queue {
             System.out.println("\n QUEUE IS FULL \n");
             return;
         }
-        Scanner scanner = new Scanner(System.in);
         
+        Food food = askForFood(); // creates one Food object
         
-        System.out.print("Enter value to queue: ");
-        int value = scanner.nextInt();
-        scanner.nextLine();
-        
-        /*
-        
-        
-        */
         if(isEmpty()){
             front = 0;
             rear = 0;
@@ -117,11 +84,11 @@ public class Queue {
         else{
         front = ((front-1)+capacity)%capacity;
         }
-        arr[front] = value;
+        arr[front] = food;
         size++;
         
-        System.out.println( "You have enqueued " + value + " to the index " + front);
-        System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+        System.out.println( "You have enqueued " + food.getType() + " to the index " + front);
+        System.out.println("Your top is: " + arr[front].getType() + " and your rear is: " + arr[rear].getType());
     }
     
     
@@ -134,7 +101,7 @@ public class Queue {
             return;
         }
         
-        int deValue = arr[front]; //storing value dequeued
+        String deValue = arr[front].getType(); //storing value dequeued
         
         
         //assign front the result of front+1 modulus capacity
@@ -157,7 +124,7 @@ public class Queue {
         }
         else{
             System.out.println("You have dequeued " + deValue);
-            System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+            System.out.println("Your top is: " + arr[front].getType() + " and your rear is: " + arr[rear].getType());
         }
         
 
@@ -173,7 +140,7 @@ public class Queue {
             return;
         }
         
-        int deValue = arr[front]; //storing value dequeued
+        String deValue = arr[front].getType(); //storing value dequeued
         
         rear = ((rear-1)+capacity)%capacity;
         size--;
@@ -188,29 +155,29 @@ public class Queue {
         }
         else{
             System.out.println("You have dequeued: " + deValue);
-            System.out.println("Your top is: " + arr[front] + " and your rear is: " + arr[rear]);
+            System.out.println("Your top is: " + arr[front].getType() + " and your rear is: " + arr[rear].getType());
         }
      }
     
      
     
-    public int getFront(){
+    public String getFront(){
     
         if(isEmpty()){
-            System.out.println("\n QUEUE IS EMPTY \n");
-            return -1;
+            
+            return " FOOD TRAY IS EMPTY \n";
         }
-       return arr[front];
+       return arr[front].getType();
     }
     
-    public int getRear(){
+    public String getRear(){
         if(isEmpty()){
-            System.out.println("\n QUEUE IS EMPTY \n");
-            return -1;
+            
+            return " FOOD TRAY IS EMPTY \n";
         }   
         
         
-        return arr[rear];
+        return arr[rear].getType();
         }
     
     public void display(){
@@ -247,19 +214,99 @@ public class Queue {
         
     }
     
-    public double askWeight(){
+    public void removeAll(){
+    
+        size = 0;
+        front = 0;
+        rear= -1;
+        
+        
+    }
+ 
+    //*********************DOUBLE ENDED QUEUE METHODS FINISH HERE *******
+    
+    
+    //**********************METHOD USING FOOD CLASS**********************
+    //method
+    private Food askForFood() {
+        while (true) {
+            String type = in.askUserForText(
+                "Enter food: Burger, Pizza, Fries, Sandwich, or Hotdog\n\n "
+            ).trim();
+
+            switch (type.toLowerCase()) {
+                case "burger":
+                    return new Burger(askWeight(), askBBD());
+                    
+                case "pizza":
+                    return new Pizza(askWeight(), askBBD());
+              
+                case "fries":
+                    return new Fries(askWeight(), askBBD());
+               
+                case "sandwich":
+                    return new Sandwich(askWeight(), askBBD());
+                     
+                case "hotdog":
+                    return new Hotdog(askWeight(), askBBD());
+                 
+                    
+                
+                default:
+                    System.out.println("Please enter one of the five listed foods.");
+            }
+        }
+    }
+
+     
+     
+     public double askWeight(){
         double weight = in.askUserForDouble("Enter the weight of your food (in grams)", 0.01, 2000);
         return weight;
     }
     
-    public static LocalDate askBBD(){
+    public LocalDate askBBD(){
         LocalDate today = LocalDate.now();
         LocalDate latestAllowed = today.plusDays(14);
+        int year, month, day;
+        
+        while (true) {
+            try {
+                System.out.print("Year: ");
+                year = in.askUserForInt("Please enter a year", 2026, 5000);
+
+                System.out.print("Month (1-12): ");
+                month = in.askUserForInt("Please enter the month (1-12):", 1, 12);
+
+                System.out.print("Day: ");
+                day = in.askUserForInt("Please enter the day: ", 1, 31);
+
+                LocalDate bbd = LocalDate.of(year, month, day);
+
+                if (bbd.isBefore(today)) {
+                    
+                    System.out.println("Date cannot be in the past. Try again.");
+                    
+                } else if (bbd.isAfter(latestAllowed)) {
+                    
+                    System.out.println("Date must be within the next 14 days. Try again.");
+                    
+                } else {
+                    
+                    return bbd;
+                }
+                
+            } catch (NumberFormatException | DateTimeException e) {
+                
+                System.out.println("Invalid date or number. Please try again.");
+                
+            }     
+             
+            
+        }
     }
-      
     
     
     
 }
    
-
