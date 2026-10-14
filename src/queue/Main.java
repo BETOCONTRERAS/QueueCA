@@ -18,7 +18,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         
         
-        Queue queue = new Queue(8);
+        Queue queue = new Queue(5);
         int choice = 0;
         boolean isRunning = true;
         
@@ -36,7 +36,7 @@ public class Main {
         System.out.println("8. exit");
         
         System.out.print("\nEnter your choice: ");
-        choice =scanner.nextInt(); //HOW TO SOLVE WRONG INPUT -> LETTERS??!!
+        choice =scanner.nextInt(); //HOW TO SOLVE WRONG INPUT ->
         scanner.nextLine();
 
         switch(choice){
