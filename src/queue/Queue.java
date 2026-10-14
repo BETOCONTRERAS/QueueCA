@@ -4,27 +4,33 @@
  */
 package queue;
 
+import food.Burger;
+import food.Food;
+import inpututils.InputUtils;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 
 /**
  *
  * @author jaccc
  */
 public class Queue {
-    
+    InputUtils in = new InputUtils();
+   
     //CIRCULAR QUEUE
     
     //properties
-    private int[] arr;
+    private Food[] arr;
     private int front ;
     private int rear ;
-    private int capacity;
+    private final int capacity;
     private int size;
     
     //constructor
     public Queue(int capacity){
         
-        arr = new int[capacity];
+        arr = new Food[capacity];
         this.capacity = capacity;
         front = 0;
         rear = -1;
@@ -53,10 +59,23 @@ public class Queue {
         
         Scanner scanner = new Scanner(System.in);
         
+        String type;
+        int weight;
+        String bbd;
+        boolean isValid =false;
         
-        System.out.print("Enter value to queue: ");
-        int value = scanner.nextInt();
-        scanner.nextLine();
+        do{
+        type = in.askUserForText("Please enter the food you want (5 options only ): Burger, Pizza, Fries, Sandwich, Hotdog");
+        type.trim();
+         switch(type.toLowerCase()){
+                        case "burger":
+                 
+         
+         
+         }
+        
+        
+        } while (!isValid);
 
 //assign to rear the result of rear+1 modulus capacity, and then assign the value given to 
         /*
@@ -228,6 +247,19 @@ public class Queue {
         
     }
     
-}
+    public double askWeight(){
+        double weight = in.askUserForDouble("Enter the weight of your food (in grams)", 0.01, 2000);
+        return weight;
+    }
     
+    public static LocalDate askBBD(){
+        LocalDate today = LocalDate.now();
+        LocalDate latestAllowed = today.plusDays(14);
+    }
+      
+    
+    
+    
+}
+   
 
