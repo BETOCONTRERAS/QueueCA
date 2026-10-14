@@ -26,43 +26,30 @@ public class Food {
         this.bbd = bbd;
     }
     
-    
+
     //getters and setters
     //only have setter is you have to change the value
     //only have get if something else is allowed to see the value
-
+       
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
     }
 
     public LocalDate getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDate timeStamp) {
-        this.timeStamp = timeStamp;
-    }
-
+ 
     public LocalDate getBbd() {
         return bbd;
     }
 
-    public void setBbd(LocalDate bbd) {
-        this.bbd = bbd;
-    }
-    
+ 
 
     
     
