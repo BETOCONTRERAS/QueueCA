@@ -63,7 +63,7 @@ public class Queue {
         arr[rear] = food;
         size++;
 
-        System.out.println("Added " + food.getType() + " to the queue.");
+        System.out.println("\nAdded " + food.getType() + " to the queue.\n");
         
         
     }
@@ -189,6 +189,8 @@ public class Queue {
         
         System.out.println("\n DISPLAYING QUEUE \n");
         
+        
+        System.out.println("FRONT");
         // for loop to go through array/queue
         for (int i = 0; i < size; i++){
             
@@ -204,11 +206,19 @@ public class Queue {
                     index= 1
                     display arr at index 1
                     */
-            
+           
             int index = (front + i)%capacity;
-            System.out.print(arr[index] + " ");
+            System.out.println(
+                    //format i.e.  1. BURGER | 190g | Best before: date | Stored date: date      
+                    
+                    
+                    arr[index].getType() + " | " +   //print name of the food
+                    arr[index].getWeight() + "g" +      // print weight of the food
+                    " | " +"Best before: " + arr[index].getBbd() +      //print best before date
+                    " | " + "Stored date: " + arr[index].getTimeStamp());       //prints the date it was created
             
         }
+        System.out.print("REAR");
         
         System.out.println("\n\n QUEUE FINISHED \n");
         
@@ -272,24 +282,24 @@ public class Queue {
         
         while (true) {
             try {
-                System.out.print("Year: ");
-                year = in.askUserForInt("Please enter a year", 2026, 5000);
+                System.out.println("\nBEST BEFORE DATE\n");
+                
 
-                System.out.print("Month (1-12): ");
-                month = in.askUserForInt("Please enter the month (1-12):", 1, 12);
+                year = in.askYear(2);
 
-                System.out.print("Day: ");
-                day = in.askUserForInt("Please enter the day: ", 1, 31);
+                month = in.askUserForInt("Month - ", 1, 12);
+
+                day = in.askDay();
 
                 LocalDate bbd = LocalDate.of(year, month, day);
 
                 if (bbd.isBefore(today)) {
                     
-                    System.out.println("Date cannot be in the past. Try again.");
+                    System.out.println("\nDate cannot be in the past. Try again.\n");
                     
                 } else if (bbd.isAfter(latestAllowed)) {
                     
-                    System.out.println("Date must be within the next 14 days. Try again.");
+                    System.out.println("\nDate must be within the next 14 days. Try again.\b");
                     
                 } else {
                     
@@ -305,6 +315,8 @@ public class Queue {
             
         }
     }
+    
+    
     
     
     
