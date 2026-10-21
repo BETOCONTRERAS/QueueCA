@@ -167,7 +167,8 @@ public class Queue {
             
             return " FOOD TRAY IS EMPTY \n";
         }
-       return arr[front].getType();
+       return ("\n" + arr[front].getType()+" | " + arr[front].getWeight() + "g" + " | " +"Best before: " 
+               + arr[front].getBbd() + " | " + "Stored date: " + arr[front].getTimeStamp())+ "\n"; 
     }
     
     public String getRear(){
@@ -177,7 +178,8 @@ public class Queue {
         }   
         
         
-        return arr[rear].getType();
+        return ("\n" + arr[rear].getType()+" | " + arr[rear].getWeight() + "g" + " | " +"Best before: " 
+               + arr[rear].getBbd() + " | " + "Stored date: " + arr[rear].getTimeStamp())+ "\n"; 
         }
     
     public void display(){
@@ -187,7 +189,7 @@ public class Queue {
             return;
         }
         
-        System.out.println("\n DISPLAYING QUEUE \n");
+        System.out.println("\nQUEUE \n");
         
         
         System.out.println("FRONT");
@@ -218,9 +220,7 @@ public class Queue {
                     " | " + "Stored date: " + arr[index].getTimeStamp());       //prints the date it was created
             
         }
-        System.out.print("REAR");
-        
-        System.out.println("\n\n QUEUE FINISHED \n");
+        System.out.println("REAR");
         
     }
     
@@ -271,7 +271,7 @@ public class Queue {
      
      
      public double askWeight(){
-        double weight = in.askUserForDouble("Enter the weight of your food (in grams)", 0.01, 2000);
+        double weight = in.askUserForDouble("\nEnter the weight of your food (in grams)", 0.01, 2000);
         return weight;
     }
     
@@ -282,13 +282,14 @@ public class Queue {
         
         while (true) {
             try {
-                System.out.println("\nBEST BEFORE DATE\n");
+                System.out.println("\nBEST BEFORE DATE -\n");
                 
-
+                System.out.println("Year -");
                 year = in.askYear(2);
 
                 month = in.askUserForInt("Month - ", 1, 12);
-
+                
+                System.out.println("Day -");
                 day = in.askDay();
 
                 LocalDate bbd = LocalDate.of(year, month, day);
