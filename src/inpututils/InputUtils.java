@@ -194,7 +194,7 @@ public class InputUtils {
                 
                 userInput = myKB.nextInt(); //this might go wrong
                 if((userInput<cuYear) || (userInput > (cuYear + extraYearsFromNow))){
-                    System.out.println("Keep in mind years cannot be in the past and cannot exceed " + extraYearsFromNow + " from this year");
+                    System.out.println("Keep in mind years cannot be in the past and cannot exceed " + extraYearsFromNow + " extra years from this year");
                 }
                 valid = true;
             }
