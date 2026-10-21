@@ -4,6 +4,7 @@
  */
 package inpututils;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -163,6 +164,78 @@ public class InputUtils {
         //input must be valid
         return userInput;
         
+    }
+    
+    /**
+     * Asks user for a year, with an extra years from now that user should not consider
+     * if used, is not valid
+     *
+     * @param extraYearsFromNow is used as an addition to the currentYear that the user input must not pass
+     * @return userInput returns an integer value which is a year, that does not exceeds the addition of the current year and 
+     * extra years from  now. This integer is not possible to be in pass
+     */
+   
+    public int askYear(int extraYearsFromNow){
+        
+        Scanner myKB = new Scanner(System.in);
+        LocalDate date = LocalDate.now();
+        String cuYearString = date.toString().substring(0, 4);  //taking this years to string -> substring and making it an int
+        int cuYear = Integer.parseInt(cuYearString); //current Year
+
+        int userInput=0;
+        boolean valid = false;
+        
+        do{
+            //this gets repeated
+            try{
+                boolean correct = false;
+                
+                System.out.print("Please enter a year: ");
+                
+                userInput = myKB.nextInt(); //this might go wrong
+                if((userInput<cuYear) || (userInput > (cuYear + extraYearsFromNow))){
+                    System.out.println("Keep in mind years cannot be in the past and cannot exceed " + extraYearsFromNow + " from this year");
+                }
+                valid = true;
+            }
+            catch(Exception e){
+                System.out.println("Numbers can only be entered." );
+                myKB.nextLine(); //prevents infinite loop
+            }
+            
+        }while ( (!valid) || ( (userInput<cuYear) || (userInput > (cuYear + extraYearsFromNow))));
+            //do loop while OR input is not valid OR (input less than current year) or input more than current year plus years extra from now)
+            
+        //input must be valid
+        return userInput;
+        
+    } 
+    
+    
+    public int askDay(){
+      
+        Scanner myKB = new Scanner(System.in);
+        int userInput=0;
+        boolean valid = false;
+        int minDay =1;
+        int maxDay =31;
+        
+        do{
+            //this gets repeated
+            try{
+                
+                System.out.print("Please enter a day number between " + minDay + " and " + maxDay + " (if applicable for the month chosen): ");
+                userInput = myKB.nextInt(); //this might go wrong
+                valid = true;
+            }
+            catch(Exception e){
+                System.out.println("That was not an number between " + minDay + " and " + maxDay + ". Please try again.");
+                myKB.nextLine(); //prevents infinite loop
+            }
+            
+        }while ( (!valid) || ( (userInput<minDay) || (userInput > maxDay)));
+        //input must be valid
+        return userInput;
     }
     
 }
