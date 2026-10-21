@@ -20,7 +20,7 @@ public class Main {
         InputUtils in = new InputUtils();
         
         
-        Queue queue = new Queue(5);
+        Queue queue = new Queue(8);
         int choice = 0;
         boolean isRunning = true;
         
@@ -41,8 +41,12 @@ public class Main {
         System.out.println("5. First Food at the FRONT");
         System.out.println("6. First Food at the BACK");
         System.out.println("7. Display Queue");
-        System.out.println("8. Remove ALL");
-        System.out.println("9. Exit\n");
+        System.out.println("8. Exit\n");
+        
+        
+           
+            queue.display();
+            
         
         choice = in.askUserForInt("\nEnter your choice:");
 
@@ -81,14 +85,11 @@ public class Main {
                     queue.display();
                 break;
                 
-           // case 8: 
-                //    queue.removeAll();
-              //  break;    
+            case 8: 
+                    isRunning = false;
+                break;    
                 
-            case 9:
-                   isRunning = false;
-                break;
-                
+           
             default:
                     System.out.println("not valid choice");
            
