@@ -41,7 +41,8 @@ public class Main {
         System.out.println("5. First Food at the FRONT");
         System.out.println("6. First Food at the BACK");
         System.out.println("7. Display Queue");
-        System.out.println("8. Exit\n");
+        System.out.println("8. Remove all");
+        System.out.println("9. Exit\n");
         
         
            
@@ -84,8 +85,13 @@ public class Main {
             case 7: 
                     queue.display();
                 break;
-                
+            
+            //remove all    
             case 8: 
+                    queue.removeAll();
+                break;    
+                
+            case 9: 
                     isRunning = false;
                 break;    
                 
